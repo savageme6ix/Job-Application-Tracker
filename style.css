@@ -1,0 +1,15 @@
+*{
+    box-sizing: border-box;
+}
+.table{
+    border-collapse: collapse;
+    border: solid 1px black;
+    width: 80%;
+}
+.head{
+    border-bottom: solid 1px black;
+}
+td,th{
+    border-right: solid 1px black;
+    padding: 15px;
+}
