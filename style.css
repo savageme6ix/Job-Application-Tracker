@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     border: 1px solid black;
+    border-radius: 20px;
     margin-bottom: 10px;
     width: 50%;
 }
@@ -14,6 +15,43 @@
     align-items: center;
     justify-content: center;
 }
+#name{
+    height: 50px;
+    border: solid 1px black;
+    border-radius: 10px;
+    width: 290px;
+}
+#role,#status,#msg{
+    height: 50px;
+    border: solid 1px black;
+    border-radius: 10px;
+}
+#role{
+    width: 290px;
+}
+#status{
+    width: 290px;
+}
+#date{
+    height: 50px;
+    border: solid 1px black;
+    border-radius: 10px;
+    width: 290px;
+}
+.role{
+    margin-left: 70px;
+}
+.date{
+    margin-left: 15px;
+}
+.status{
+    margin-left: 60px;
+}
+.notes{
+    display: flex;
+    align-items: center;
+}
+
 .table{
     border-collapse: collapse;
     border: solid 1px black;
