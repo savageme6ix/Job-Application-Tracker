@@ -80,3 +80,6 @@ td,th{
     border-right: solid 1px black;
     padding: 15px;
 }
+td{
+    border-bottom: solid 1px black;
+}
