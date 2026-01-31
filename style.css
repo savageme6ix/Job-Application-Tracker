@@ -42,6 +42,7 @@ input,textarea{
     border: solid 1px black;
     border-radius: 10px;
 }
+
 #role{
     width: 290px;
 }
@@ -53,19 +54,6 @@ input,textarea{
     border: solid 1px black;
     border-radius: 10px;
     width: 290px;
-}
-.role{
-    margin-left: 70px;
-}
-.date{
-    margin-left: 15px;
-}
-.status{
-    margin-left: 60px;
-}
-.notes{
-    display: flex;
-    align-items: center;
 }
 
 .table{
@@ -82,4 +70,26 @@ td,th{
 }
 td{
     border-bottom: solid 1px black;
+}
+.name, .role, .date, .status, .notes{
+    display: flex;
+    flex-direction: column;
+}
+.notes{
+    margin-left: 70px;
+}
+.name > label{
+    margin-bottom: 10px;
+}
+.role > label{
+    margin-bottom: 10px;
+}
+.status > label{
+    margin-bottom: 10px;
+}
+.notes > label{
+    margin-bottom: 10px;
+}
+.date > label{
+    margin-bottom: 10px;
 }
