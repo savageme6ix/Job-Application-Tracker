@@ -1,44 +1,30 @@
-let job2 = JSON.parse(localStorage.getItem('jobObj'));
-let jobObj = "";
-let job=job2||[];
+import { job, saveJob } from './data.js';
 
-console.log(job2)
+const form = document.querySelector(".form");
+const body = document.querySelector(".body");
 
-let form = document.querySelector(".form");
-let nameData = document.querySelector(".Cname")
-let roleData = document.querySelector(".Crole")
-let statusData = document.querySelector(".Cstatus")
-let dateData = document.querySelector(".Adate")
-let body = document.querySelector(".body")
-
-let formData;
-tableData();
-function getFormData(event){
-
-    event.preventDefault();
-    formData = new FormData(form);
-    // console.log(Object.fromEntries(formData));
-    job.push(Object.fromEntries(formData));
-    localStorage.setItem('jobObj',JSON.stringify(job));
-    console.log(job)
-    tableData();
-}
-
-function tableData(){
-    let tHtml;
-    job.forEach((job,index)=>{
-    tHtml += `
+function tableData() {
+    if (!body) return;
+    let tHtml = ""; 
+    job.forEach((item, index) => {
+        tHtml += `
             <tr>
-                <td class="Cname" data-id = "${index}">${job.company_name}</td>
-                <td class="Crole">${job.user_role}</td>
-                <td class="Adate">${job.user_date}</td>
-                <td class="Cstatus">${job.job_status}</td>
-            </tr>
-        `
-    })
-    // console.log(job[2])
-    body.innerHTML = tHtml
+                <td>${item.company_name}</td>
+                <td>${item.user_role}</td>
+                <td>${item.user_date}</td>
+                <td>${item.job_status}</td>
+            </tr>`;
+    });
+    body.innerHTML = tHtml;
 }
-form.addEventListener("submit", getFormData)
 
-console.log(job)
+if (form) {
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const formData = new FormData(form);
+        saveJob(Object.fromEntries(formData));
+        tableData();
+    });
+}
+
+tableData();
