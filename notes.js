@@ -9,7 +9,7 @@ function getNotes() {
     let allNotesHtml = "";
     job.forEach((item) => {
         if (item.user_message) {
-            allNotesHtml += `<p> ${item.company_name} ${item.user_message}</p>`;
+            allNotesHtml += `<p> ${item.company_name} ${item.user_message}</p> <hr>`;
         }
     });
     noteContainer.innerHTML = allNotesHtml;
