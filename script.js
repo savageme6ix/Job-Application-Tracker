@@ -3,10 +3,7 @@ let jobObj = "";
 let job=job2||[];
 
 console.log(job2)
-let id;
-job.forEach((job,index)=>{
-    id = index
-})
+
 let form = document.querySelector(".form");
 let nameData = document.querySelector(".Cname")
 let roleData = document.querySelector(".Crole")
@@ -31,7 +28,7 @@ function tableData(){
     job.forEach((job,index)=>{
     tHtml += `
             <tr>
-                <td class="Cname">${job.company_name}</td>
+                <td class="Cname" data-id = "${index}">${job.company_name}</td>
                 <td class="Crole">${job.user_role}</td>
                 <td class="Adate">${job.user_date}</td>
                 <td class="Cstatus">${job.job_status}</td>
@@ -43,3 +40,4 @@ function tableData(){
 }
 form.addEventListener("submit", getFormData)
 
+console.log(job)
