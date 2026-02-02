@@ -1,6 +1,7 @@
 body{
     display:flex;
     justify-content: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .note-div {
     display: flex;
@@ -52,3 +53,25 @@ body{
     line-height: 1.5;
 }
 
+.card-action button {
+    color: #888;
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    margin-left: 20px;
+}
+
+.edit:hover{
+    background-color: #1DB954;
+    color: black;
+    transition: all 0.8s;
+}
+.delete:hover{
+    background-color: maroon;
+    color: white;
+    transition: all 0.8s;
+}
