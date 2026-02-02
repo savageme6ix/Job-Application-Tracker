@@ -1,0 +1,54 @@
+body{
+    display:flex;
+    justify-content: center;
+}
+.note-div {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+    width:80%;
+    height: 100vh;
+    border-radius: 10px;
+    justify-content: flex-start;
+    background-color: #e8eefd; 
+}
+
+
+.note-card {
+    display: flex;
+    align-items: center;
+    margin-left: 90px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    max-width: 800px;
+}
+
+
+.card-image img {
+    width: 120px;
+    height: 120px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+
+
+.card-content {
+    flex-grow: 1;
+}
+
+.company-name {
+    margin: 0 0 8px 0;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.user-note {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
