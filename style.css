@@ -128,3 +128,12 @@ td{
     padding: 10px;
     background-color: #04c956;
 }
+.search-container{
+    position: relative;
+    bottom: 60px;
+}
+#searchInput{
+    border: 1px solid black;
+    height: 50px;
+    border-radius:10px;
+}
