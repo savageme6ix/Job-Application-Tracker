@@ -25,35 +25,20 @@ if (form) {
         const formData = new FormData(form);
         saveJob(Object.fromEntries(formData));
         tableData();
-        clear();
-        clearTextArea();
         clearForm();
     });
 }
 
-function clear(){
-    let inputElements = document.querySelectorAll('input');
-    inputElements.forEach((el)=>{
-        el.value = ""
-    })
-}
-
-function clearTextArea(){
-    let textareas = document.querySelectorAll('textarea');
-    textareas.forEach((el)=>{
-        el.value = ""
-    })
+function clearForm(){
+    form.reset();
+    form.style.display = "none";
+    formwrapper.style.display = "none";
 }
 
     document.querySelector(".job-form").addEventListener('click',()=>{
         form.style.display="flex"
         formwrapper.style.display="flex"
     })
-
-function clearForm(){
-        form.style.display="none"
-        formwrapper.style.display="none"
-}
 
 if (formwrapper) {
     formwrapper.addEventListener('click', (e) => {
