@@ -86,3 +86,10 @@ body{
     color: white;
     transition: all 0.8s;
 }
+/* Styling for when the note is editable */
+.user-note[contenteditable="true"] { /* conditional logic in css didnt know that */
+    outline: 2px dashed #007bff;
+    padding: 5px;
+    background-color: #fcfcfc;
+    border-radius: 4px;
+}

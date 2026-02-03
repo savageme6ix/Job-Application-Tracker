@@ -19,7 +19,7 @@ function getNotes() {
                     <p class="user-note">${item.user_message}</p>
                 </div>
                 <div class="card-action">
-                    <button class="edit">+ Edit Notes</button>
+                    <button class="edit" data-id="${item.id}">+ Edit Notes</button>
                     <button class="delete" data-id="${item.id}"> Delete Notes</button>
                 </div>
             </div>
@@ -44,10 +44,46 @@ function deleteNoteOnly(id) {
     }
 }
 
+function handleEdit(button, id) {
+    const card = button.closest('.note-card');
+    const noteElement = card.querySelector('.user-note');
+    
+    //  Check if user is currently editing or saving
+    const isEditing = noteElement.contentEditable === "true";
+
+    if (!isEditing) {
+        // --- START EDITING ---
+        noteElement.contentEditable = "true";
+        noteElement.focus(); // focus ** didnt know bout that
+        button.textContent = "💾 Save Note";
+        button.classList.add("saving-mode"); // Add a class for styling
+    } else {
+        // --- SAVE CHANGES ---
+        noteElement.contentEditable = "false";
+        button.textContent = "+ Edit Notes";
+        button.classList.remove("saving-mode");
+        //  Update the main 'job' array
+        const jobIndex = job.findIndex(item => item.id === id);
+        if (jobIndex !== -1) {
+            job[jobIndex].user_message = noteElement.innerText; // Get the new text
+            
+            //  Persist to LocalStorage
+            localStorage.setItem('jobObj', JSON.stringify(job));
+            console.log("Saved new note:");
+        }
+    }
+}
+
 noteContainer.addEventListener('click', (e) => {
+    const id = e.target.getAttribute('data-id');
+
     if (e.target.classList.contains('delete')) {
-        const idToDelete = e.target.getAttribute('data-id');
-        deleteNoteOnly(idToDelete);
+        deleteNoteOnly(id);
+    }
+    
+    if (e.target.classList.contains('edit')) {
+        // passing the button itself (e.target) and the ID
+        handleEdit(e.target, id);
     }
 });
 
