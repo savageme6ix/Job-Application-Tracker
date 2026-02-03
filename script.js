@@ -30,6 +30,7 @@ body.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-job')) {
         const id = event.target.getAttribute('data-id');
         deleteJob(id)
+        tableData();
     }
 });
 

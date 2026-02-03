@@ -7,8 +7,6 @@ export function deleteJob(id) {
     // Update localStorage
     localStorage.setItem('jobObj', JSON.stringify(updatedJobs));
     
-    // Refresh the page to show the changes
-    window.location.reload(); 
 }
 
 export function saveJob(newJob) {
