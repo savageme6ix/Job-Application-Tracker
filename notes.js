@@ -2,10 +2,15 @@ import { job } from './data.js';
 
 let noteContainer = document.querySelector(".note-div");
 
+// --- MODAL SELECTORS ---
+const modal = document.querySelector("#deleteModal");
+const confirmBtn = document.querySelector("#confirmDelete");
+const cancelBtn = document.querySelector("#cancelDelete");
+let currentIdToDelete = null; // holds the ID while the modal is open
+
 function getNotes() {
     if (!noteContainer) return;
 
-    // filter the main job list to only show items that HAVE a message ** the trim is to cut off spaces and ensure the user hasnt just input blank spaces
     const jobsWithNotes = job.filter(item => item.user_message && item.user_message.trim() !== "");
 
     noteContainer.innerHTML = jobsWithNotes.map((item) => {
@@ -27,43 +32,65 @@ function getNotes() {
     }).join('');
 }
 
-// This function only clears the NOTE, not the JOB
-function deleteNoteOnly(id) {
-    // Find the specific job in the main array *** find index is a new method i found, it  returns the index of the first element in an array that satisfies a provided testing function. If no elements satisfy the function, it returns -1. 
-    const jobIndex = job.findIndex(item => item.id === id);
-    // if an element has satisfied the function
-    if (jobIndex !== -1) {
-        if(confirm ("Are you sure if you want to delete this note?")){
-            // Clear the message string
-            job[jobIndex].user_message = ""; 
-            
-            // Save the main job list back to localStorage
-            localStorage.setItem('jobObj', JSON.stringify(job));
-            
-            // Refresh the UI
-            getNotes();
-        } else{
-            console.log("Deletion cancelled")
-        }
-        
-    }
+// --- MODAL CORE LOGIC ---
+
+function openModal(id) {
+    currentIdToDelete = id; 
+    modal.style.display = "flex"; 
 }
+
+function closeModal() {
+    modal.style.display = "none";
+    currentIdToDelete = null;
+}
+
+function executeDelete() {
+    if (currentIdToDelete !== null) {
+        // Find the specific job in the main array *** find index is a new method i found, it  returns the index of the first element in an array that satisfies a provided testing function. If no elements satisfy the function, it returns -1. 
+        const jobIndex = job.findIndex(item => item.id === currentIdToDelete);
+         // if an element has satisfied the function
+        if (jobIndex !== -1) {
+            job[jobIndex].user_message = ""; 
+            localStorage.setItem('jobObj', JSON.stringify(job));
+            getNotes(); // Refresh UI
+        }
+    }
+    closeModal();
+}
+
+// --- EVENT LISTENERS ---
+
+noteContainer.addEventListener('click', (e) => {
+    const id = e.target.getAttribute('data-id');
+
+    if (e.target.classList.contains('delete')) {
+        openModal(id); // opens the UI
+    }
+    
+    if (e.target.classList.contains('edit')) {
+        handleEdit(e.target, id);
+    }
+});
+
+// Modal Buttons
+confirmBtn.addEventListener('click', executeDelete);
+cancelBtn.addEventListener('click', closeModal);
 
 function handleEdit(button, id) {
     const card = button.closest('.note-card');
     const noteElement = card.querySelector('.user-note');
-    
+
     //  Check if user is currently editing or saving
     const isEditing = noteElement.contentEditable === "true";
 
     if (!isEditing) {
-        // --- START EDITING ---
+         // --- START EDITING ---
         noteElement.contentEditable = "true";
         noteElement.focus(); // focus ** didnt know bout that
         button.textContent = "💾 Save Note";
         button.classList.add("saving-mode"); // Add a class for styling
     } else {
-        // --- SAVE CHANGES ---
+         // --- SAVE CHANGES ---
         noteElement.contentEditable = "false";
         button.textContent = "+ Edit Notes";
         button.classList.remove("saving-mode");
@@ -71,25 +98,10 @@ function handleEdit(button, id) {
         const jobIndex = job.findIndex(item => item.id === id);
         if (jobIndex !== -1) {
             job[jobIndex].user_message = noteElement.innerText; // Get the new text
-            
-            //  Persist to LocalStorage
+             //  Persist to LocalStorage
             localStorage.setItem('jobObj', JSON.stringify(job));
-            console.log("Saved new note:");
         }
     }
 }
-
-noteContainer.addEventListener('click', (e) => {
-    const id = e.target.getAttribute('data-id');
-
-    if (e.target.classList.contains('delete')) {
-        deleteNoteOnly(id);
-    }
-    
-    if (e.target.classList.contains('edit')) {
-        // passing the button itself (e.target) and the ID
-        handleEdit(e.target, id);
-    }
-});
 
 getNotes();
