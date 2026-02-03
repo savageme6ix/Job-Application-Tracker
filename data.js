@@ -2,10 +2,10 @@ export let job = JSON.parse(localStorage.getItem('jobObj')) || [];
 
 export function deleteJob(id) {
     // Create a new array without the item we want to delete
-    const updatedJobs = job.filter(item => item.id !== id);
+    job = job.filter(item => item.id !== id);
     
     // Update localStorage
-    localStorage.setItem('jobObj', JSON.stringify(updatedJobs));
+    localStorage.setItem('jobObj', JSON.stringify(job));
     
 }
 
