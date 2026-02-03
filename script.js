@@ -24,7 +24,23 @@ if (form) {
         const formData = new FormData(form);
         saveJob(Object.fromEntries(formData));
         tableData();
+        clear();
+        clearTextArea();
     });
+}
+
+function clear(){
+    let inputElements = document.querySelectorAll('input');
+    inputElements.forEach((el)=>{
+        el.value = ""
+    })
+}
+
+function clearTextArea(){
+    let textareas = document.querySelectorAll('textarea');
+    textareas.forEach((el)=>{
+        el.value = ""
+    })
 }
 
 tableData();
