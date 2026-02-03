@@ -13,6 +13,11 @@ function getNotes() {
 
     const jobsWithNotes = job.filter(item => item.user_message && item.user_message.trim() !== "");
 
+   if (jobsWithNotes.length === 0) {
+        noteContainer.innerHTML = `<h1 class="empty-msg">You Have No Notes</h1>`;
+        return; // Important: Stop the function here!
+    }
+    
     noteContainer.innerHTML = jobsWithNotes.map((item) => {
         return `
             <div class="note-card">

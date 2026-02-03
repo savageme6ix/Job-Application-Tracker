@@ -121,3 +121,7 @@ body{
 
 .btn-secondary { background: #eee; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
 .btn-danger { background: #ff4d4d; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; }
+
+.empty-msg{
+    text-align: center;
+}

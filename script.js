@@ -7,6 +7,11 @@ const searchFeature = document.querySelector("#searchInput")
 
 function tableData(dataToRender = job) {
     if (!body) return;
+    if (dataToRender.length === 0) {
+    body.innerHTML = `<tr><td colspan="4" style="text-align:center;">No matches found</td></tr>`;
+    return;
+}
+
     let tHtml = ""; 
     dataToRender.forEach((item) => {
         tHtml += `
@@ -65,5 +70,6 @@ if(searchFeature){
         tableData(filterdJobs)
     })
 }
+
 
 tableData();
