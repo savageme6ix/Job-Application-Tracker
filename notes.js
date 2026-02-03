@@ -33,14 +33,19 @@ function deleteNoteOnly(id) {
     const jobIndex = job.findIndex(item => item.id === id);
     // if an element has satisfied the function
     if (jobIndex !== -1) {
-        // Clear the message string
-        job[jobIndex].user_message = ""; 
+        if(confirm ("Are you sure if you want to delete this note?")){
+            // Clear the message string
+            job[jobIndex].user_message = ""; 
+            
+            // Save the main job list back to localStorage
+            localStorage.setItem('jobObj', JSON.stringify(job));
+            
+            // Refresh the UI
+            getNotes();
+        } else{
+            console.log("Deletion cancelled")
+        }
         
-        // Save the main job list back to localStorage
-        localStorage.setItem('jobObj', JSON.stringify(job));
-        
-        // Refresh the UI
-        window.location.reload();
     }
 }
 
