@@ -49,15 +49,20 @@ function clearTextArea(){
         form.style.display="flex"
         formwrapper.style.display="flex"
     })
-    // if(form.style.display = "flex"){
-    //     formwrapper.addEventListener('click', ()=>{
-    //         form.style.display = "none"
-    //         formwrapper.style.display = "none"
-    //     })
-    // }
+
 function clearForm(){
         form.style.display="none"
         formwrapper.style.display="none"
+}
+
+if (formwrapper) {
+    formwrapper.addEventListener('click', (e) => {
+        // If the user clicked the background (the wrapper) 
+        // and NOT the form or its children...
+        if (e.target === formwrapper) {
+            clearForm();
+        }
+    });
 }
 
 tableData();
