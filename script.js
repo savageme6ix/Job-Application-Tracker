@@ -1,6 +1,7 @@
 import { job, saveJob } from './data.js';
 
 const form = document.querySelector(".form");
+const formwrapper = document.querySelector(".form-wrapper");
 const body = document.querySelector(".body");
 
 function tableData() {
@@ -26,6 +27,7 @@ if (form) {
         tableData();
         clear();
         clearTextArea();
+        clearForm();
     });
 }
 
@@ -41,6 +43,21 @@ function clearTextArea(){
     textareas.forEach((el)=>{
         el.value = ""
     })
+}
+
+    document.querySelector(".job-form").addEventListener('click',()=>{
+        form.style.display="flex"
+        formwrapper.style.display="flex"
+    })
+    // if(form.style.display = "flex"){
+    //     formwrapper.addEventListener('click', ()=>{
+    //         form.style.display = "none"
+    //         formwrapper.style.display = "none"
+    //     })
+    // }
+function clearForm(){
+        form.style.display="none"
+        formwrapper.style.display="none"
 }
 
 tableData();
