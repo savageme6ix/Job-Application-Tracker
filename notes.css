@@ -15,6 +15,14 @@ body{
     background-color: #e8eefd; 
 }
 
+.user-note {
+    color: #666;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    overflow-wrap: break-word;   /* Modern version of word-wrap */
+    word-break: break-word;   /*   Ensures it doesn't push the parent width */
+    
+}
 
 .note-card {
     display: flex;
@@ -39,6 +47,7 @@ body{
 
 .card-content {
     flex-grow: 1;
+    min-width: 0;
 }
 
 .company-name {
@@ -52,7 +61,10 @@ body{
     font-size: 0.95rem;
     line-height: 1.5;
 }
-
+.card-action{
+    display: flex;
+    flex-direction: row;
+}
 .card-action button {
     color: #888;
     padding: 10px;
@@ -64,7 +76,6 @@ body{
     white-space: nowrap;
     margin-left: 20px;
 }
-
 .edit:hover{
     background-color: #1DB954;
     color: black;
