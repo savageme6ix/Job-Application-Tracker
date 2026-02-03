@@ -20,7 +20,7 @@ const searchFeature = document.querySelector("#searchInput")
                 <td>${item.user_role}</td>
                 <td>${item.user_date}</td>
                 <td>${item.job_status}</td>
-                <td><button type="button" class='delete-job' data-id=${item.id}>Delete</button></td>
+                <td><button type="button" class='delete-job' data-id="${item.id}">Delete</button></td>
             </tr>`;
     });
     body.innerHTML = tHtml;
