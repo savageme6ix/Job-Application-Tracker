@@ -1,11 +1,11 @@
-import { job, saveJob } from './data.js';
+import { job, saveJob, deleteJob } from './data.js';
 
 const form = document.querySelector(".form");
 const formwrapper = document.querySelector(".form-wrapper");
 const body = document.querySelector(".body");
 const searchFeature = document.querySelector("#searchInput")
 
-function tableData(dataToRender = job) {
+ function tableData(dataToRender = job) {
     if (!body) return;
     if (dataToRender.length === 0) {
     body.innerHTML = `<tr><td colspan="4" style="text-align:center;">No matches found</td></tr>`;
@@ -20,10 +20,18 @@ function tableData(dataToRender = job) {
                 <td>${item.user_role}</td>
                 <td>${item.user_date}</td>
                 <td>${item.job_status}</td>
+                <td><button type="button" class='delete-job' data-id=${item.id}>Delete</button></td>
             </tr>`;
     });
     body.innerHTML = tHtml;
 }
+
+body.addEventListener('click', (event) => {
+    if (event.target.classList.contains('delete-job')) {
+        const id = event.target.getAttribute('data-id');
+        deleteJob(id)
+    }
+});
 
 if (form) {
     form.addEventListener("submit", (e) => {
