@@ -97,8 +97,6 @@ Planned upgrades include:
  
  . User authentication
  
- . Status color badges
- 
  . Sorting by date or company
  
  . Responsive mobile design
@@ -110,11 +108,11 @@ Planned upgrades include:
 
 1. Clone repository
    
-    git clone https://github.com/YOUR_USERNAME/job-tracker.git
+   git clone https://github.com/savageme6ix/Job-Application-Tracker.git
 
 3. Open folder
    
-    cd job-tracker
+    cd Job-Application-Tracker
 
 5. Open application.html in browser
 (Or use Live Server if using VS Code)
