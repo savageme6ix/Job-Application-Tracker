@@ -39,12 +39,12 @@ function getNotes() {
 
 // --- MODAL CORE LOGIC ---
 
-function openModal(id) {
+export function openModal(id) {
     currentIdToDelete = id; 
     modal.style.display = "flex"; 
 }
 
-function closeModal() {
+export function closeModal() {
     modal.style.display = "none";
     currentIdToDelete = null;
 }

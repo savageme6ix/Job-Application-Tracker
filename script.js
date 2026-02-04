@@ -4,6 +4,10 @@ const form = document.querySelector(".form");
 const formwrapper = document.querySelector(".form-wrapper");
 const body = document.querySelector(".body");
 const searchFeature = document.querySelector("#searchInput")
+const modal = document.querySelector("#deleteModal");
+const confirmBtn = document.querySelector("#confirmDelete");
+const cancelBtn = document.querySelector("#cancelDelete");
+let currentIdToDelete = null; // holds the ID while the modal is open   
 
 function getStatusClass(status) {
     if (!status) return '';
@@ -36,11 +40,37 @@ function tableData(dataToRender = job) {
     body.innerHTML = tHtml;
 }
 
+function openModal(id) {
+    currentIdToDelete = id;
+    modal.style.display = "flex";
+}
+
+function closeModal() {
+    modal.style.display = "none";
+    currentIdToDelete = null;
+}
+
+function executeDelete() {
+    if (currentIdToDelete !== null) {
+        deleteJob(currentIdToDelete);
+        const searchTerm = searchFeature?.value?.toLowerCase().trim() || "";
+        if (searchTerm) {
+            const filtered = job.filter(item =>
+                item.company_name.toLowerCase().includes(searchTerm) ||
+                item.job_status.toLowerCase().includes(searchTerm)
+            );
+            tableData(filtered);
+        } else {
+            tableData();
+        }
+    }
+    closeModal();
+}
+
 body.addEventListener('click', (event) => {
     if (event.target.classList.contains('delete-job')) {
         const id = event.target.getAttribute('data-id');
-        deleteJob(id)
-        tableData();
+        openModal(id);
     }
 });
 
@@ -90,5 +120,11 @@ if(searchFeature){
     })
 }
 
-
+if (modal && confirmBtn && cancelBtn) {
+    confirmBtn.addEventListener('click', executeDelete);
+    cancelBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+}
 tableData();
