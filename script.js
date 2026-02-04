@@ -72,12 +72,15 @@ function executeDelete() {
     closeModal();
 }
 
-body.addEventListener('click', (event) => {
-    if (event.target.classList.contains('delete-job')) {
-        const id = event.target.getAttribute('data-id');
-        openModal(id);
-    }
-});
+// Guard: only attach if table body exists (avoids crash if DOM structure changes)
+if (body) {
+    body.addEventListener('click', (event) => {
+        if (event.target.classList.contains('delete-job')) {
+            const id = event.target.getAttribute('data-id');
+            openModal(id);
+        }
+    });
+}
 
 if (form) {
     form.addEventListener("submit", (e) => {

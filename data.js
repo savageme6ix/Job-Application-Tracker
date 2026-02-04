@@ -1,4 +1,13 @@
-export let job = JSON.parse(localStorage.getItem('jobObj')) || [];
+// Prevents crash if localStorage contains corrupt/invalid JSON
+function loadJobs() {
+    try {
+        const stored = localStorage.getItem('jobObj');
+        return stored ? JSON.parse(stored) : [];
+    } catch {
+        return [];
+    }
+}
+export let job = loadJobs();
 
 export function deleteJob(id) {
     // Create a new array without the item we want to delete

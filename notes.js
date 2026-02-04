@@ -40,12 +40,12 @@ function getNotes() {
 // --- MODAL CORE LOGIC ---
 
 export function openModal(id) {
-    currentIdToDelete = id; 
-    modal.style.display = "flex"; 
+    currentIdToDelete = id;
+    if (modal) modal.style.display = "flex"; // Guard: avoid error if modal missing
 }
 
 export function closeModal() {
-    modal.style.display = "none";
+    if (modal) modal.style.display = "none"; // Guard: avoid error if modal missing
     currentIdToDelete = null;
 }
 
@@ -65,21 +65,24 @@ function executeDelete() {
 
 // --- EVENT LISTENERS ---
 
-noteContainer.addEventListener('click', (e) => {
-    const id = e.target.getAttribute('data-id');
+// Guard: only attach if note container exists (avoids crash on wrong page)
+if (noteContainer) {
+    noteContainer.addEventListener('click', (e) => {
+        const id = e.target.getAttribute('data-id');
 
-    if (e.target.classList.contains('delete')) {
-        openModal(id); // opens the UI
-    }
-    
-    if (e.target.classList.contains('edit')) {
-        handleEdit(e.target, id);
-    }
-});
+        if (e.target.classList.contains('delete')) {
+            openModal(id); // opens the UI
+        }
+        
+        if (e.target.classList.contains('edit')) {
+            handleEdit(e.target, id);
+        }
+    });
+}
 
-// Modal Buttons
-confirmBtn.addEventListener('click', executeDelete);
-cancelBtn.addEventListener('click', closeModal);
+// Guard: only attach if buttons exist (avoids crash if modal elements missing)
+if (confirmBtn) confirmBtn.addEventListener('click', executeDelete);
+if (cancelBtn) cancelBtn.addEventListener('click', closeModal);
 
 function handleEdit(button, id) {
     const card = button.closest('.note-card');
