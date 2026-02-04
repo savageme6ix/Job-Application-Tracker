@@ -5,22 +5,32 @@ const formwrapper = document.querySelector(".form-wrapper");
 const body = document.querySelector(".body");
 const searchFeature = document.querySelector("#searchInput")
 
- function tableData(dataToRender = job) {
-    if (!body) return;
-    if (dataToRender.length === 0) {
-    body.innerHTML = `<tr><td colspan="4" style="text-align:center;">No matches found</td></tr>`;
-    return;
+function getStatusClass(status) {
+    if (!status) return '';
+    const s = status.toLowerCase();
+    if (s === 'waiting') return 'waiting';
+    if (s === 'interview') return 'interview';
+    if (s === 'rejected') return 'rejected';
+    return '';
 }
 
-    let tHtml = ""; 
+function tableData(dataToRender = job) {
+    if (!body) return;
+    if (dataToRender.length === 0) {
+        body.innerHTML = `<tr class="empty-state"><td colspan="5">No matches found</td></tr>`;
+        return;
+    }
+
+    let tHtml = "";
     dataToRender.forEach((item) => {
+        const statusClass = getStatusClass(item.job_status);
         tHtml += `
             <tr>
                 <td>${item.company_name}</td>
                 <td>${item.user_role}</td>
                 <td>${item.user_date}</td>
-                <td>${item.job_status}</td>
-                <td><button type="button" class='delete-job' data-id="${item.id}">Delete</button></td>
+                <td><span class="status-badge ${statusClass}">${item.job_status}</span></td>
+                <td style="text-align:right;"><button type="button" class='delete-job' data-id="${item.id}">Delete</button></td>
             </tr>`;
     });
     body.innerHTML = tHtml;

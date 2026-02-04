@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Job tracker</title>
+    <title>Job Application Tracker</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <main class="app">
     <header class="header-section">
         <h1>Job Application Tracker</h1>
     </header>
@@ -57,6 +58,7 @@
         <input type="text" id="searchInput" placeholder="Search by company or status...">
     </div>
 
+    <div class="table-wrapper">
     <table class="table">
         <thead class="head">
             <tr>
@@ -71,6 +73,8 @@
            
         </tbody>
     </table>
+    </div>
+    </main>
 
 <script type="module" src="script.js"></script>
 </body>
