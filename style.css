@@ -344,7 +344,12 @@ body {
   cursor: pointer;
   transition: all 0.2s ease;
 }
-
+#totalApplications {
+  margin-top: 10px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
 .addBtn:hover {
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(56, 189, 248, 0.4);
