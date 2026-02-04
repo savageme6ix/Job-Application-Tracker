@@ -8,6 +8,10 @@ const modal = document.querySelector("#deleteModal");
 const confirmBtn = document.querySelector("#confirmDelete");
 const cancelBtn = document.querySelector("#cancelDelete");
 let currentIdToDelete = null; // holds the ID while the modal is open   
+let jobcount = document.querySelector("#totalApplications");
+function updateJobCount(jobArray = job) { 
+    jobcount.textContent = jobArray.length;
+}
 
 function getStatusClass(status) {
     if (!status) return '';
@@ -53,6 +57,7 @@ function closeModal() {
 function executeDelete() {
     if (currentIdToDelete !== null) {
         deleteJob(currentIdToDelete);
+        updateJobCount();
         const searchTerm = searchFeature?.value?.toLowerCase().trim() || "";
         if (searchTerm) {
             const filtered = job.filter(item =>
@@ -80,6 +85,7 @@ if (form) {
         const formData = new FormData(form);
         saveJob(Object.fromEntries(formData));
         tableData();
+        updateJobCount();
         clearForm();
     });
 }
@@ -117,6 +123,7 @@ if(searchFeature){
         })
         // Re-render the table with only the filtered results
         tableData(filterdJobs)
+        updateJobCount(filterdJobs);
     })
 }
 
@@ -128,3 +135,4 @@ if (modal && confirmBtn && cancelBtn) {
     });
 }
 tableData();
+updateJobCount();
